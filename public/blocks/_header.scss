@@ -1,5 +1,37 @@
 .header {
-    width: 100px;
-    height: 100px;
-    background-color: red;
+
+
+    &__inner {
+        @include flex;
+        padding-top   : 38px;
+        padding-bottom: 39px;
+        margin        : 0 auto;
+        max-width     : 1170px;
+    }
+
+    &__logo-container {
+        @include flex;
+    }
+
+    &__img {}
+
+    &__logo-text {
+        margin-left: 9px;
+        font-family: $work;
+        font-weight: bold;
+        font-size  : 20px;
+        line-height: 23px;
+    }
+
+    &__nav {
+        @include flex;
+    }
+
+    &__nav-item {}
+
+    &__link {}
+
+    &__nav-item--active {}
+
+    &__nav-item--login {}
 }
