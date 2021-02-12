@@ -13,11 +13,10 @@
         @include flex;
     }
 
-    &__img {
-    }
+    &__img {}
 
     &__logo-text {
-        margin-left: 9000px;
+        margin-left: 9px;
         font-family: $work;
         font-weight: bold;
         font-size  : 20px;
@@ -30,11 +29,7 @@
 
     &__nav-item {}
 
-    &__link {
-        font-family: $robo;
-        font-size  : 16px;
-        line-height: 19px;
-    }
+    &__link {}
 
     &__nav-item--active {}
 
