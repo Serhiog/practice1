@@ -7,10 +7,12 @@
         padding-bottom: 39px;
         margin        : 0 auto;
         max-width     : 1170px;
+        align-items   : flex-end;
     }
 
     &__logo-container {
         @include flex;
+        align-items: flex-end;
     }
 
     &__img {}
@@ -20,18 +22,39 @@
         font-family: $work;
         font-weight: bold;
         font-size  : 20px;
-        line-height: 23px;
     }
 
     &__nav {
         @include flex;
     }
 
-    &__nav-item {}
+    &__nav-item {
+        margin-left: 25px;
+    }
 
-    &__link {}
+    &__link {
+        font-family: $robo;
+        font-size  : 16px;
+        color      : #1F1E25;
+    }
 
-    &__nav-item--active {}
+    &__link--active {
+        color: #2C36F2;
+    }
 
-    &__nav-item--login {}
+    &__link--login {
+        margin-left: 155px;
+        position   : relative;
+
+        &::before {
+            content          : '';
+            position         : absolute;
+            width            : 20px;
+            height           : 22px;
+            background-image : url("../img/login.svg");
+            background-repeat: no-repeat;
+            left             : -28px;
+            bottom           : -2px;
+        }
+    }
 }
