@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import rootReducer from "./store/rootReducer";
-import { getExchangeRate } from "./api";
+//import { getExchangeRate } from "./api";
 
 const store = createStore(
   rootReducer,
