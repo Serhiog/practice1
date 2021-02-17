@@ -3,6 +3,7 @@
 
     &__wrapper {
         max-width     : 1170px;
+        min-width     : 1170px;
         margin        : 0 auto;
         padding-top   : 60px;
         padding-bottom: 100px;
@@ -60,6 +61,7 @@
         @extend %btn;
         width     : 120px;
         appearance: none;
+        padding-left: 25px;
     }
 
     &__option {}

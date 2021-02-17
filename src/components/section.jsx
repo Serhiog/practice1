@@ -9,7 +9,7 @@ const Section = () => {
                         <div className="section__left">
                             <h1 className="section__title">Лига Банк</h1>
                             <p className="section__text">Кредиты на любой случай</p>
-                            <a className="section__button" href="/calculate.html">Рассчитать кредит</a>
+                            <a className="section__button" href="/#">Рассчитать кредит</a>
                         </div>
                         <div className="section__right">
                         </div>

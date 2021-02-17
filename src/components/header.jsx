@@ -11,22 +11,22 @@ const Header = () => {
                 </div>
                 <ul className="header__nav">
                     <li className="header__nav-item">
-                        <a href="/services" className="header__link">Услуги</a>
+                        <a href="/#" className="header__link">Услуги</a>
                     </li>
                     <li className="header__nav-item">
-                        <a href="/credit" className="header__link">Рассчитать кредит</a>
+                        <a href="/#" className="header__link">Рассчитать кредит</a>
                     </li>
                     <li className="header__nav-item">
-                        <a href="/converter" className="header__link header__link--active">Конвертер валют</a>
+                        <a href="/#" className="header__link header__link--active">Конвертер валют</a>
                     </li>
                     <li className="header__nav-item">
-                        <a href="/contacts" className="header__link">Контакты</a>
+                        <a href="/#" className="header__link">Контакты</a>
                     </li>
                     <li className="header__nav-item">
-                        <a href="/question" className="header__link">Задать вопрос</a>
+                        <a href="/#" className="header__link">Задать вопрос</a>
                     </li>
                     <li className="header__nav-item">
-                        <a href="/login" className="header__link header__link--login">Войти в Интернет-банк</a>
+                        <a href="/#" className="header__link header__link--login">Войти в Интернет-банк</a>
                     </li>
                 </ul>
 

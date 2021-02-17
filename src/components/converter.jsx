@@ -1,34 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { ActionCreator } from "../store/action"
 import { fetchExchangeRate } from "../api-actions"
+import withForm from "../hocs/withForm"
 
-const Converter = ({ haveCurrency, wantCurrency, date, handleHaveCurrencyChange, handleGetCurrencyChange, handleWantCurrencyChange, exchangeRate, handleDateChange, handleHistorySave }) => {
-    useEffect(() => { handleGetCurrencyChange(haveCurrency, wantCurrency, date) }, [haveCurrency, wantCurrency, handleGetCurrencyChange, date]);
 
-    const [haveValue, setHaveValue] = useState('')
-    const [wantValue, setWantValue] = useState('')
+const Converter = ({ haveCurrency, wantCurrency, date, loading, error, handleHaveCurrencyChange, handleGetCurrencyChange, handleWantCurrencyChange, exchangeRate, handleDateChange, saveToHistory, haveValue, wantValue, onWantValueChange, onHaveValueChange }) => {
+
 
     const handleHaveInputChange = ((evt) => {
         const value = parseInt(evt.target.value, 10)
-        setHaveValue(evt.target.value);
+        onHaveValueChange(evt.target.value);
         if (isNaN(value)) {
-            setWantValue('')
+            onWantValueChange('')
         } else {
             const newValue = value * exchangeRate[`${haveCurrency}_${wantCurrency}`]
-            setWantValue(newValue.toFixed(2))
+            onWantValueChange(newValue.toFixed(2))
         }
     })
     const handleWantInputChange = ((evt) => {
         const value = parseInt(evt.target.value, 10)
-        setWantValue(evt.target.value);
+        onWantValueChange(evt.target.value);
         if (isNaN(value)) {
-            setHaveValue('')
+            onHaveValueChange('')
         } else {
             const newValue = value * exchangeRate[`${wantCurrency}_${haveCurrency}`]
-            setHaveValue(newValue.toFixed(2))
+            onHaveValueChange(newValue.toFixed(2))
         }
     })
+
+    const handleHistorySave = () => {
+        saveToHistory(date, haveCurrency, wantCurrency, haveValue, wantValue);
+    };
 
     return (
         <section className="converter">
@@ -75,6 +78,8 @@ const mapToStateProps = (state) => ({
     haveCurrency: state.haveCurrency,
     wantCurrency: state.wantCurrency,
     date: state.date,
+    loading: state.loading,
+    error: state.error,
     exchangeRate: state.exchangeRate
 });
 
@@ -91,10 +96,15 @@ const mapDispatchToProps = (dispatch) => ({
     handleDateChange(evt) {
         dispatch(ActionCreator.handleDateChange(evt.target.value));
     },
-    handleHistorySave(date, haveCurrency, wantCurrency, haveValue, wantValue) {
-        dispatch(ActionCreator.handleHistorySave(date, haveCurrency, wantCurrency, haveValue, wantValue));
+    saveToHistory(date, haveCurrency, wantCurrency, haveValue, wantValue) {
+        const payload = {
+            date,
+            from: `${haveValue} ${haveCurrency}`,
+            to: `${wantValue} ${wantCurrency}`,
+        }
+        dispatch(ActionCreator.handleHistorySave(payload));
     }
 });
 
 
-export default connect(mapToStateProps, mapDispatchToProps)(Converter);
+export default withForm(connect(mapToStateProps, mapDispatchToProps)(Converter));

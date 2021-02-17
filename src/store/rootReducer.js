@@ -1,12 +1,13 @@
 import { getISOFormattedDate, extend } from "../utils";
 import { ActionType } from "../store/action";
+import { MAX_HISTORY_SIZE } from "../consts";
 
 const initialState = {
-  history: [{ date: "", from: "", to: "" }],
+  history: [],
   haveCurrency: "RUB",
   wantCurrency: "USD",
   date: getISOFormattedDate(new Date()),
-  exchangeRate: {},
+  exchangeRate: null,
   loading: false,
   error: false,
 };
@@ -27,11 +28,11 @@ export default function rootReducer(state = initialState, action) {
       });
     case ActionType.SAVE_HISTORY:
       return extend(state, {
-        history: [...state.history, action.payload],
+        history: [action.payload, ...state.history].slice(0, MAX_HISTORY_SIZE),
       });
     case ActionType.CLEAR_CURRENCY:
       return extend(state, {
-        history: null,
+        history: [],
       });
     case ActionType.UPDATE_EXCHANE_RATE:
       return extend(state, {
