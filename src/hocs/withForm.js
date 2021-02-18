@@ -1,42 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { fetchExchangeRate } from "../api-actions"
+import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
+import {fetchExchangeRate} from "../api-actions";
+import PropTypes from "prop-types";
 
-const withForm = (
-  Component,
-  handleGetCurrencyChange,
-  haveCurrency,
-  wantCurrency,
-  date
-) => () => {
-  const [haveValue, setHaveValue] = useState("");
-  const [wantValue, setWantValue] = useState("");
+const withForm = (Component) => {
+  function FormWrapperComponent({
+    handleGetCurrencyChange,
+    haveCurrency,
+    wantCurrency,
+    date,
+    loading,
+    error,
+    exchangeRate,
+  }) {
 
-  const onHaveValueChange = (evt) => setHaveValue(evt.target.value);
-  const onWantValueChange = (evt) => setWantValue(evt.target.value);
+    FormWrapperComponent.propTypes = {
+      handleGetCurrencyChange: PropTypes.any,
+      haveCurrency: PropTypes.any,
+      wantCurrency: PropTypes.any,
+      date: PropTypes.any,
+      loading: PropTypes.any,
+      error: PropTypes.any,
+      exchangeRate: PropTypes.any,
+    };
+    const [haveValue, setHaveValue] = useState(``);
+    const [wantValue, setWantValue] = useState(``);
 
-  useEffect(() => {
-    handleGetCurrencyChange(haveCurrency, wantCurrency, date);
-  }, [haveCurrency, wantCurrency, handleGetCurrencyChange, date]);
+    const onHaveValueChange = (value) => setHaveValue(value);
+    const onWantValueChange = (value) => setWantValue(value);
 
-  // useEffect(() => {
-  //   if (!loading && !error && exchangeRate !== null) {
-  //     if (haveValue !== null) {
-  //       const newValue =
-  //         haveValue * exchangeRate[`${haveCurrency}_${wantCurrency}`];
-  //       setWantValue(newValue.toFixed(2));
-  //     }
-  //   }
-  // }, [loading, error, exchangeRate]);
+    useEffect(() => {
+      handleGetCurrencyChange(haveCurrency, wantCurrency, date);
+    }, [haveCurrency, wantCurrency, handleGetCurrencyChange, date]);
 
-  return (
-    <Component
-      haveValue={haveValue}
-      wantValue={wantValue}
-      onHaveValueChange={onHaveValueChange}
-      onWantValueChange={onWantValueChange}
-    />
-  );
+    useEffect(() => {
+      if (!loading && !error && exchangeRate !== null) {
+        if (haveValue !== null) {
+          const newValue =
+            haveValue * exchangeRate[`${haveCurrency}_${wantCurrency}`];
+          setWantValue(newValue.toFixed(2));
+        }
+      }
+    }, [loading, error, exchangeRate]);
+
+    return (
+      <Component
+        haveValue={haveValue}
+        wantValue={wantValue}
+        onHaveValueChange={onHaveValueChange}
+        onWantValueChange={onWantValueChange}
+      />
+    );
+  }
+
+  return connect(mapToStateProps, mapDispatchToProps)(FormWrapperComponent);
 };
 
 const mapToStateProps = (state) => ({
@@ -54,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapToStateProps, mapDispatchToProps)(withForm);
+export default withForm;

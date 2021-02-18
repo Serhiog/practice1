@@ -1,11 +1,11 @@
-import { getISOFormattedDate, extend } from "../utils";
-import { ActionType } from "../store/action";
-import { MAX_HISTORY_SIZE } from "../consts";
+import {getISOFormattedDate, extend} from "../utils";
+import {ActionType} from "../store/action";
+import {MAX_HISTORY_SIZE} from "../consts";
 
 const initialState = {
   history: [],
-  haveCurrency: "RUB",
-  wantCurrency: "USD",
+  haveCurrency: `RUB`,
+  wantCurrency: `USD`,
   date: getISOFormattedDate(new Date()),
   exchangeRate: null,
   loading: false,

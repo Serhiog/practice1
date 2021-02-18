@@ -1,5 +1,5 @@
-import { getExchangeRate } from "./api";
-import { ActionCreator } from "./store/action";
+import {getExchangeRate} from "./api";
+import {ActionCreator} from "./store/action";
 
 export const fetchExchangeRate = (fromCurrency, toCurrency, date) => (dispatch) => {
   dispatch(ActionCreator.getExchangeRate());
