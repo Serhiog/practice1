@@ -2,7 +2,11 @@
   "name": "practice1",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "homepage": "https://github.com/Serhiog",
+=======
+  "homepage": "http://serhiog.github.io/practice1",
+>>>>>>> master
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
