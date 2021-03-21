@@ -4,7 +4,7 @@ import Section from "./components/section";
 import Converter from "./components/converter";
 import History from "./components/history";
 import Footer from "./components/footer";
-import { HashRouter } from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 
 const App = () => {
   return (
